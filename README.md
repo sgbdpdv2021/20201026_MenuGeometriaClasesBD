@@ -12,9 +12,9 @@ git init
 git add README.md
 git commit -m "first commit"
 git branch -M main
-git remote add origin https://github.com/sgbdpdv2021/20201023_MenuGeometriaCalsesDB.git
+git remote add origin https://github.com/sgbdpdv2021/20201026_MenuGeometriaClasesBD.git
 git push -u origin main
 
 --
 
-En esta versión hacemos la modificación de un objeto de la BD
+En esta versión hacemos la modificación 6de un objeto de la BD

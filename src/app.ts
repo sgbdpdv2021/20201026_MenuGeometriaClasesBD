@@ -140,18 +140,20 @@ const main = async () => {
                             query = await Triangulos.findOne( {_nombre: nombrev2} )
                             // Crear el doc Schema y objeto Schema a partir del objeto
                             // salvarlo
-                            console.log(query)
+                            if (query === null){
+                                console.log('No existe')
+                            }else{
+                                console.log(query)
 
-                            triangulov2 = 
-                               new Triangulo(query._nombre, query._base, query._lado2, query._lado3)
-                            triangulov2.altura = query._altura    
-                            
+                                triangulov2 = 
+                                   new Triangulo(query._nombre, query._base, query._lado2, query._lado3)
+                                triangulov2.altura = query._altura  
+                            }
+  
                             await disconnect()
                             break
                         case 7:
                             await connect()
-
-
                             const nuevo = await Triangulos.findOneAndUpdate( 
                                 { _nombre: triangulov2.nombre }, 
                                 {
@@ -162,11 +164,32 @@ const main = async () => {
                                     _altura: triangulov2.altura
                                 },
                                 {new: true}  // para que devuelva el objeto nuevo, actualizado
-                                )
+                            )
                             console.log(nuevo)
                             
                             await disconnect()
                             break
+                        case 8:
+                                await connect()
+                                const r = await Triangulos.findOneAndDelete(
+                                    { _nombre: triangulov2.nombre }, 
+                                    (err) => {
+                                        if(err) {
+                                            console.log(err)
+                                        }else{
+                                            console.log(`Borrado correcto`)
+                                        }
+                                    })
+                                console.log(r)
+                                await disconnect()
+                                break
+                        case 9:
+                                console.log(`Nombre: ${triangulov2.nombre}`)
+                                console.log(`Base: ${triangulov2.base}`)
+                                console.log(`Altura: ${triangulov2.altura}`)
+                                console.log(`Lado 2: ${triangulov2.lado2}`)
+                                console.log(`Lado 3: ${triangulov2.lado3}`)                               
+                                break
                         case 0:
                             console.log('\n--ADIÓS--')
                             break
