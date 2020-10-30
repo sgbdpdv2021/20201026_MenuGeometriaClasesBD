@@ -25,6 +25,7 @@ export const menuTriangulo = async () => {
     console.log('7.- Modificar Triángulo de la BD')
     console.log('8.- Borrar Triángulo de la BD')
     console.log('9.- Mostrar Triángulo')
+    console.log('10.- Listar superficies de triángulos')
     console.log('0.- SALIR')
     n = parseInt( await leerTeclado('--OPCIÓN--') )
     return n

@@ -1,6 +1,6 @@
 import { menuPral, menuTriangulo } from './vistas/menu'
 import { leerTeclado } from './vistas/lecturaTeclado'
-import { Triangulo, Triangulos } from './model/Triangulo'
+import { Triangulo, Triangulos, tTriangulo} from './model/Triangulo'
 import { Cuadrado } from './model/Cuadrado'
 import { Rectangulo } from './model/Rectangulo'
 import { Circulo } from './model/Circulo'
@@ -170,26 +170,45 @@ const main = async () => {
                             await disconnect()
                             break
                         case 8:
-                                await connect()
-                                const r = await Triangulos.findOneAndDelete(
-                                    { _nombre: triangulov2.nombre }, 
-                                    (err) => {
-                                        if(err) {
-                                            console.log(err)
-                                        }else{
-                                            console.log(`Borrado correcto`)
-                                        }
-                                    })
-                                console.log(r)
-                                await disconnect()
-                                break
+                            await connect()
+                            const r = await Triangulos.findOneAndDelete(
+                                { _nombre: triangulov2.nombre }, 
+                                (err) => {
+                                    if(err) {
+                                        console.log(err)
+                                    }else{
+                                        console.log(`Borrado correcto`)
+                                    }
+                                })
+                            console.log(r)
+                            await disconnect()
+                            break
                         case 9:
-                                console.log(`Nombre: ${triangulov2.nombre}`)
-                                console.log(`Base: ${triangulov2.base}`)
-                                console.log(`Altura: ${triangulov2.altura}`)
-                                console.log(`Lado 2: ${triangulov2.lado2}`)
-                                console.log(`Lado 3: ${triangulov2.lado3}`)                               
-                                break
+                            console.log(`Nombre: ${triangulov2.nombre}`)
+                            console.log(`Base: ${triangulov2.base}`)
+                            console.log(`Altura: ${triangulov2.altura}`)
+                            console.log(`Lado 2: ${triangulov2.lado2}`)
+                            console.log(`Lado 3: ${triangulov2.lado3}`)                               
+                            break
+                        case 10:
+                            await connect()
+                            let tmpTriangulo: Triangulo
+                            let dTriangulo: tTriangulo
+                            query =  await Triangulos.find( {} )
+                            console.log(query)
+                            for (dTriangulo of query){
+                                console.log(dTriangulo);
+
+                                tmpTriangulo = 
+                                    new Triangulo(dTriangulo._nombre, dTriangulo._base, 
+                                            dTriangulo._lado2, dTriangulo._lado3)
+                                tmpTriangulo.altura = dTriangulo._altura 
+                                
+                                console.log(tmpTriangulo.area())
+
+                            }
+                            await disconnect()                          
+                            break
                         case 0:
                             console.log('\n--ADIÓS--')
                             break

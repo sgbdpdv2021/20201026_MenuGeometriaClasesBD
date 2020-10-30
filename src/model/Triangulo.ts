@@ -67,6 +67,16 @@ export class Triangulo{
     }
 }
 
+// Definimos el type
+
+export type tTriangulo = {
+    _nombre: string,
+    _base: number,
+    _lado2: number,
+    _lado3: number,
+    _altura: number
+}
+
 // Definimos el Schema
 const trianguloSchema = new Schema({
     _nombre: String,
